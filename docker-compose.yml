@@ -1,0 +1,44 @@
+version: '3'
+
+services:
+
+  #database:
+  #  image: mariadb:latest
+  #  container_name: mariadb
+  #  restart: unless-stopped
+  #  volumes:
+  #    - database:/var/lib/mysql
+  #  ports:
+  #    - 3306:3306
+  #  environment:
+  #    MYSQL_ROOT_PASSWORD: zMRYTe7kKhY6
+  #    MYSQL_USER: test
+  #    MYSQL_PASSWORD: cR5WchT95ZU3
+
+  #database_admin:
+  #  image: adminer:latest
+  #  container_name: adminer
+  #  depends_on:
+  #    - database
+  #  restart: unless-stopped
+  #  ports:
+  #    - 8080:8080
+
+  django:
+    build: .
+    container_name: ${PROJECT_NAME}
+    environment:
+      - PORT=${PORT}
+    image: ${PROJECT_NAME}:${PROJECT_VERSION}
+    #depends_on:
+    #  - database
+    restart: unless-stopped
+    volumes:
+      - ./:/usr/src/app
+    ports:
+      - 8081:8081
+
+volumes:
+  database:
+    driver: local
+
