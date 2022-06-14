@@ -28,7 +28,9 @@ services:
     build: .
     container_name: ${PROJECT_NAME}
     environment:
-      - PORT=${PORT}
+      - PROJECT_NAME=${PROJECT_NAME}
+      - PROJECT_VERSION=${PROJECT_VERSION}
+      - SERVER_PORT=${SERVER_PORT}
     image: ${PROJECT_NAME}:${PROJECT_VERSION}
     #depends_on:
     #  - database
@@ -36,9 +38,8 @@ services:
     volumes:
       - ./:/usr/src/app
     ports:
-      - 8081:8081
+      - ${SERVER_PORT}:${SERVER_PORT}
 
-volumes:
-  database:
-    driver: local
-
+#volumes:
+#  database:
+#    driver: local
